@@ -37,6 +37,7 @@ class Error(models.Model):
     title = models.CharField(verbose_name=u'Заголовок', max_length=100)
     view = models.ForeignKey(View, on_delete=models.CASCADE)
     description = models.TextField(verbose_name=u'Описание', max_length=2000, blank=True, null=True)
+    decision = models.TextField(verbose_name=u'Решение', max_length=2000, blank=True, null=True)
     attachment = models.ImageField(upload_to='error/attachment', blank=True, verbose_name='вложение')
 
     def __str__(self):
