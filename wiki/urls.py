@@ -1,6 +1,6 @@
 from django.urls import path
-from wiki.views import e
+from wiki.views.error import ErrorList
 
 urlpatterns = [
-    path('/', ErrorList.as_view(), name='index'),
+    path('', ErrorList.as_view(), name='index'),
 ]

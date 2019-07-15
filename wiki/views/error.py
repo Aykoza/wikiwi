@@ -5,7 +5,7 @@ from wiki.models import Error
 
 class ErrorList(generic.ListView):
     model = Error
-    template_name = 'main.html'
+    template_name = 'error_list.html'
     form = ErrorForm
 
     def get_context_data(self, **kwargs):
