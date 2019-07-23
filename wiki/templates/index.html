@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ошибки</title>
+    <title>WikiVi</title>
 </head>
 <body>
-    {% for error in error_list %}
-        {{ error.title }}
-        __________________________________ <br>
-    {% endfor %}
+    <h3><a href="{% url 'modules' %}">Модули</a></h3>
+    <h3><a href="{% url 'views' %}">Формы</a></h3>
+    <h3><a href="{% url 'errors' %}">Ошибки</a></h3>
+    <hr>
 </body>
 </html>

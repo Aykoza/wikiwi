@@ -33,6 +33,7 @@ class View(models.Model):
     def __str__(self):
         return self.name
 
+
 class Error(models.Model):
     title = models.CharField(verbose_name=u'Заголовок', max_length=100)
     view = models.ForeignKey(View, on_delete=models.CASCADE)
