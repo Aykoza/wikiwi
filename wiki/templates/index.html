@@ -1,13 +1,34 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="{% static "js/jquery-3.4.1.js" %}"></script>
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
     <title>WikiVi</title>
 </head>
 <body>
-    <h3><a href="{% url 'modules' %}">Модули</a></h3>
-    <h3><a href="{% url 'views' %}">Формы</a></h3>
-    <h3><a href="{% url 'errors' %}">Ошибки</a></h3>
+    <div class="head">
+        <a href="{% url 'modules' %}">Модули</a>
+        <a href="{% url 'views' %}">Формы</a>
+        <a href="{% url 'errors' %}">Ошибки</a>
+    </div>
     <hr>
+    <div class="modules">
+        {% for modul in modules %}
+            {{ modul }}
+        {% endfor %}
+    </div>
+    <script>
+        $.ajax({
+            url: "{% url 'modules' %}",
+            method: "GET",
+            dataType: "html",
+            success: function (data) {
+                // вешаем свой обработчик события success
+                $(".modules").html(data);
+            }
+        });
+    </script>
 </body>
 </html>
