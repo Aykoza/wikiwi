@@ -6,7 +6,7 @@ from wiki.views.main import Main
 
 urlpatterns = [
     path('', Main.as_view(), name='index'),
-    path('modules/', ModuleList.as_view(), name='modules'),
+    path('modules/', ModuleList.get_data, name='modules'),
     path('views/', ViewList.as_view(), name='views'),
     path('errors/', ErrorList.as_view(), name='errors'),
 ]

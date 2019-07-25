@@ -9,26 +9,29 @@
 </head>
 <body>
     <div class="head">
+        <input type="button" id="getModules" value="Модули"/>
         <a href="{% url 'modules' %}">Модули</a>
         <a href="{% url 'views' %}">Формы</a>
         <a href="{% url 'errors' %}">Ошибки</a>
     </div>
     <hr>
-    <div class="modules">
+
+
+    <script>
+
+        $("#getModules").click(function(){
+          $.ajax({url: "{% url 'modules' %}", success: function(data){
+              $("#mod").html(data['modules']);
+          }});
+        });
+
+    </script>
+    <div id="mod">
+        {{ name }}
         {% for modul in modules %}
             {{ modul }}
         {% endfor %}
     </div>
-    <script>
-        $.ajax({
-            url: "{% url 'modules' %}",
-            method: "GET",
-            dataType: "html",
-            success: function (data) {
-                // вешаем свой обработчик события success
-                $(".modules").html(data);
-            }
-        });
-    </script>
+
 </body>
 </html>
