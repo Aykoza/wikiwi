@@ -1,0 +1,48 @@
+Задание №1
+Таблица в базе данных:
+create table hotelrooms(id int, room_id int, hotel_id int, price int)
+Написать запрос который выведет ссылки на отель в котором количество комнат меньше 20.
+
+Решение
+select  hotel_id from wiki_hotelrooms group by hotel_id having count(room_id) < 20;
+
+
+###
+
+
+Задание №2
+Для предыдущей задачи сделать django model.
+И написать этот же запрос используя django orm.
+
+Решение
+from .models import HotelRooms
+from django.db.models import Count
+HotelRooms.objects.values('hotel_id').annotate(count_rooms=Count('room_id')).filter(count_rooms__lt=20)
+
+
+###
+
+
+Задание №3
+Получить данные с сайта https://www.lueftner-cruises.com/en/river-cruises/cruise.html
+Данные положить в список (для примера список заполнен из первой ссылки):
+[{
+        «name»: «Tulip Serenade»,
+        «days»: 8,
+        «itinerary»: [amsterdam,amsterdam,arnhem …..],
+        «dates»:[
+                {«2019-04-04»:{«ship»: «ms amadeus queen», «price»:1044.65},
+                ...(остальные даты)}
+        ],
+},..]
+Достаточно первых 4-х ссылок.
+При получении данных с сайта не забыть о корректном user-agent.
+В этом задании нужен скрипт работающий на python 3 под Linux, и еще один скрипт который создаёт виртуальное окружение с установкой всех нужных модулей.
+
+
+
+###
+
+
+Задание №4
+В этом задании работающий код не нужен, достаточно обозначить какие библиотеки и как будут использованы, если данные из предыдущего задания будут в виде xml файла.
