@@ -4,7 +4,7 @@ create table hotelrooms(id int, room_id int, hotel_id int, price int)
 Написать запрос который выведет ссылки на отель в котором количество комнат меньше 20.
 
 Решение
-select  hotel_id from wiki_hotelrooms group by hotel_id having count(room_id) < 20;
+select  hotel_id from hotelrooms group by hotel_id having count(room_id) < 20;
 
 
 ###
