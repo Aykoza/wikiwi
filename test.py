@@ -1,30 +1,34 @@
 import requests
 import re
 from urllib.parse import urlparse
-from bs4 import BeautifulSoup, SoupStrainer
+from bs4 import BeautifulSoup
+from fake_useragent import UserAgent
 
 URL = 'https://www.lueftner-cruises.com/en/river-cruises/cruise.html'
-# URL2 = 'https://www.lueftner-cruises.com/en/river-cruises/cruise/show/tulip-serenade-2020.html'
-DOMAIN_NAME = urlparse(URL).hostname
-PROTOCOL = urlparse(URL).scheme
+DOMAIN_NAME = urlparse(URL).hostname   # Парсим домен для сборки круизного урла
+PROTOCOL = urlparse(URL).scheme        # Парсим протокол для сборки круизного урла
+header = {'User-Agent': str(UserAgent().chrome)}
 
 
 def parser(url):
-    response = requests.get(url).text
+    response = requests.get(url, headers=header).text
     soup = BeautifulSoup(response, 'html.parser')
     return soup
 
 
 def get_cruises(url):
+    """
+    Главная функция собирающая словарь с данными о круизе
+    """
     html = parser(url)
     result = []
     cruises = [i for i in html.find_all('li', {'class': "cruise-item"})]
     for cruise in cruises:
         cruise_page = parser(get_cruise_link(cruise))
-        # print(cruise_page.prettify())
         result.append({'name': get_name(cruise),
-                       'days': get_date(cruise),
-                       'itinerary': get_itinerary(cruise_page)})
+                       'days': get_days(cruise),
+                       'itinerary': get_itinerary(cruise_page),
+                       'dates': get_date_price(cruise_page)})
     return result
 
 
@@ -32,10 +36,10 @@ def get_name(cruise):
     return cruise.find('span', {'class': "cruise-name"}).string
 
 
-def get_date(cruise):
-    date = cruise.find('span', {'class': "cruise-from-price"}).next
-    date = re.search("\d+", date).group(0)
-    return date
+def get_days(cruise):
+    days = cruise.find('span', {'class': "cruise-from-price"}).next
+    days = re.search("\d+", days).group(0)
+    return days
 
 
 def get_cruise_link(cruise):
@@ -53,5 +57,16 @@ def get_itinerary(cruise_page):
     return itinerary
 
 
+def get_date_price(cruise_page):
+    content = cruise_page.findAll('div', {'class': 'panel-heading main-cabin-heading'})
+    dates = []
+    for i in content:
+        date = i.find('span', {'class': 'price-duration'}).string
+        ship = i.find('span', {'class': 'table-ship-name'}).string
+        price = i.find('span', {'class': 'big-table-font'}).string.strip()
+        dates.append({date: {ship: price}})
+    return dates
 
-print(get_cruises(URL))
+
+for i in get_cruises(URL):
+    print(i)
