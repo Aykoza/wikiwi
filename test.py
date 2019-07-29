@@ -1,51 +1,57 @@
 import requests
-from bs4 import BeautifulSoup
+import re
+from urllib.parse import urlparse
+from bs4 import BeautifulSoup, SoupStrainer
 
-url = 'https://www.lueftner-cruises.com/en/river-cruises/cruise.html'
-response = requests.get(url).text
-soup = BeautifulSoup(response)
-# print(soup.prettify())
+URL = 'https://www.lueftner-cruises.com/en/river-cruises/cruise.html'
+# URL2 = 'https://www.lueftner-cruises.com/en/river-cruises/cruise/show/tulip-serenade-2020.html'
+DOMAIN_NAME = urlparse(URL).hostname
+PROTOCOL = urlparse(URL).scheme
 
-def get_cruises(html):
+
+def parser(url):
+    response = requests.get(url).text
+    soup = BeautifulSoup(response, 'html.parser')
+    return soup
+
+
+def get_cruises(url):
+    html = parser(url)
     result = []
-    cruises = [i for i in soup.find_all('li', {'class': "cruise-item"})]
+    cruises = [i for i in html.find_all('li', {'class': "cruise-item"})]
     for cruise in cruises:
-        result.append({'name': get_cruise_name(cruise),
-                       'days': get_cruise_date(cruise)})
+        cruise_page = parser(get_cruise_link(cruise))
+        # print(cruise_page.prettify())
+        result.append({'name': get_name(cruise),
+                       'days': get_date(cruise),
+                       'itinerary': get_itinerary(cruise_page)})
     return result
 
 
-def get_cruise_name(cruise):
+def get_name(cruise):
     return cruise.find('span', {'class': "cruise-name"}).string
 
 
-def get_cruise_date(cruise):
-    print(cruise.findAll('span', {'class': "small-btn-font"}))
-    return cruise.findAll('span', {'class': "cruise-from-price"})
-
-print(get_cruises(soup))
-
+def get_date(cruise):
+    date = cruise.find('span', {'class': "cruise-from-price"}).next
+    date = re.search("\d+", date).group(0)
+    return date
 
 
+def get_cruise_link(cruise):
+    link = '{}://{}{}'.format(PROTOCOL, DOMAIN_NAME, cruise.find('a', {'class': "cruise-link"})['href'])
+    return link
 
 
-# print(soup)
+def get_itinerary(cruise_page):
+    itinerary = []
+    itineraries = [i.string for i in cruise_page.find_all('span', {'class': "route-city"})]
+    for i in itineraries:
+        mix = i.split('>')
+        mix = list(map(lambda x: x.strip(), mix))
+        itinerary.append('>'.join(mix))
+    return itinerary
 
-# def get_html(url):
-#     response = requests.get(url)
-#     return response.text
-#
-# def get_cruise_name(html):
-#     soup = BeautifulSoup(html)
-#     # print(soup.prettify())
-#     for i in soup.find_all('span', {'class':"cruise-name"}):
-#         print(i)
-#
-# def get_cruise_from_price(html):
-#     soup = BeautifulSoup(html)
-#     soup.prettify()
-#     for i in soup.find_all('span', {'class':"cruise-from-price"}):
-#         print(i)
-#
-# get_cruise_name(get_html(url))
-# get_cruise_from_price(get_html(url))
+
+
+print(get_cruises(URL))
