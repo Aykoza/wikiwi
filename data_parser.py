@@ -3,21 +3,22 @@ import re
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
-import pprint
+import json
+
 
 URL = 'https://www.lueftner-cruises.com/en/river-cruises/cruise.html'
 DOMAIN_NAME = urlparse(URL).hostname   # Парсим домен для сборки круизного урла
 PROTOCOL = urlparse(URL).scheme        # Парсим протокол для сборки круизного урла
-header = {'User-Agent': str(UserAgent().chrome)}
+HEADER = {'User-Agent': str(UserAgent().chrome)}
 
 
 def parser(url):
-    response = requests.get(url, headers=header).text
+    response = requests.get(url, headers=HEADER).text
     soup = BeautifulSoup(response, 'html.parser')
     return soup
 
 
-def get_cruises(url):
+def get_cruises(url, cruise_cnt=4):
     """
     Главная функция собирающая словарь с данными о круизе.
     В ней уже вызываются все остальные функции для сбора данных.
@@ -25,7 +26,7 @@ def get_cruises(url):
     """
     html = parser(url)
     result = []
-    cruises = [cruise for cruise in html.find_all('li', {'class': "cruise-item"})]
+    cruises = html.find_all('li', {'class': "cruise-item"}, limit=cruise_cnt)
     for cruise in cruises:
         cruise_page = parser(get_cruise_link(cruise))
         result.append({'name': get_name(cruise),
@@ -68,12 +69,10 @@ def get_date_price(cruise_page):
         ship = i.find('span', {'class': 'table-ship-name'}).string
         price = i.find('span', {'class': 'big-table-font'}).string.strip()
         price = re.search('[\d,.]+', price).group(0)
-        # print(price)
         dates.append({date: {ship: price}})
     return dates
 
 
 if __name__ == '__main__':
-
-    pp = pprint.PrettyPrinter(indent=1)
-    pp.pprint(get_cruises(URL))
+    # Сериализация в json для более наглядного представления данных
+    print(json.dumps(get_cruises(URL), sort_keys=False, indent=4, ensure_ascii=False))
