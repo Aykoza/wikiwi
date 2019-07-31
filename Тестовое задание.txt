@@ -3,7 +3,7 @@
 create table hotelrooms(id int, room_id int, hotel_id int, price int)
 Написать запрос который выведет ссылки на отель в котором количество комнат меньше 20.
 
-Решение
+Решение:
 select  hotel_id from hotelrooms group by hotel_id having count(room_id) < 20;
 
 
@@ -14,7 +14,7 @@ select  hotel_id from hotelrooms group by hotel_id having count(room_id) < 20;
 Для предыдущей задачи сделать django model.
 И написать этот же запрос используя django orm.
 
-Решение
+Решение:
 from .models import HotelRooms
 from django.db.models import Count
 HotelRooms.objects.values('hotel_id').annotate(count_rooms=Count('room_id')).filter(count_rooms__lt=20)
@@ -39,10 +39,17 @@ HotelRooms.objects.values('hotel_id').annotate(count_rooms=Count('room_id')).fil
 При получении данных с сайта не забыть о корректном user-agent.
 В этом задании нужен скрипт работающий на python 3 под Linux, и еще один скрипт который создаёт виртуальное окружение с установкой всех нужных модулей.
 
-
+Решение:
+Скрипты в архиве data_parser
+Для установки сделал 2 скрипта один на python, другой на bash. Делают одни и те же действия.
 
 ###
 
 
 Задание №4
 В этом задании работающий код не нужен, достаточно обозначить какие библиотеки и как будут использованы, если данные из предыдущего задания будут в виде xml файла.
+
+Решение:
+Вместо BeautifulSoup будет использоватся BeautifulStoneSoup,
+так же нужно использовать аргумент конструктора selfClosingTags, т.к. BeautifulStoneSoup не знает о закрывающихся тегах XML в отличае от HTML в BeautifulSoup.
+В остальном же отличий в использовании не будет.
