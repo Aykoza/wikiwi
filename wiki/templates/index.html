@@ -18,13 +18,11 @@
 
 
     <script>
-
         $("#getModules").click(function(){
           $.ajax({url: "{% url 'modules' %}", success: function(data){
               $("#mod").html(data['modules']);
           }});
         });
-
     </script>
     <div id="mod">
         {{ name }}

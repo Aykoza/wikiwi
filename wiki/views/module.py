@@ -14,7 +14,6 @@ class ModuleList(generic.ListView):
 
     def get_data(request):
         if request.method == 'GET':
-
             modules = serialize('json', Module.objects.all())
             print(modules)
             # content = {'modules': Module.objects.all()}

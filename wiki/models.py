@@ -43,10 +43,3 @@ class Error(models.Model):
 
     def __str__(self):
         return self.title
-
-# Для тестового задания
-
-class HotelRooms(models.Model):
-    room_id = models.IntegerField()
-    hotel_id = models.IntegerField()
-    price = models.IntegerField()
