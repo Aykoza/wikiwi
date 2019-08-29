@@ -1,8 +1,12 @@
 {% for form in forms %}
-    {{ form.name }} <br>
-    {{ form.name_view }} <br>
-    {{ form.module }} <br>
-    {{ form.type }} <br>
-    {{ form.description }}
-    --- --- --- <br>
+    <input type="button" class="getForm" form_id = {{ form.id }} value="{{ form }}"/><br>
 {% endfor %}
+
+<script>
+    $(".getForm").click(function(){
+      var id = $(this).attr('form_id');
+      $.ajax({url: "{% url 'form' %}", data: {'id': id }, success: function(data){
+          $("#content").html(data.form);
+      }});
+    });
+</script>

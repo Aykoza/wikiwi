@@ -15,6 +15,9 @@
     <hr>
 
 
+    <div id="content">
+    </div>
+
     <script>
         $("#getModules").click(function(){
           $.ajax({url: "{% url 'modules' %}", success: function(data){
@@ -28,11 +31,12 @@
           }});
         });
 
-
+        $("#getForm").click(function(){
+          $.ajax({url: "{% url 'form' %}", data: {'id': 1}, success: function(data){
+              $("#content").html(data.form);
+          }});
+        });
     </script>
-
-    <div id="content">
-    </div>
 
 </body>
 </html>
