@@ -5,12 +5,20 @@
     <meta charset="UTF-8">
     <script src="{% static "js/jquery-3.4.1.js" %}"></script>
     <link href="{% static "css/style.css" %}" rel="stylesheet">
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">#}
     <title>WikiVi</title>
 </head>
 <body>
     <div class="head">
-        <input type="button" id="getModules" value="Модули" name="modules"/>
-        <input type="button" id="getForms" value="Формы"/>
+        <form action="/example/handler.php">
+          <div>
+            <input type="search" id="myRequest" name="q">
+            <input type="button" onclick="runSearch()" id="goSearch" value="Поиск"/>
+          </div>
+        </form>
+        <input type="button" onclick="getModules()" value="Модули" name="modules"/>
+        <input type="button" onclick="getForms()" value="Формы"/>
+        <input type="button" onclick="getKnowledge()" value="Знания"/>
     </div>
     <hr>
 
@@ -19,23 +27,30 @@
     </div>
 
     <script>
-        $("#getModules").click(function(){
+        function getModules(){
           $.ajax({url: "{% url 'modules' %}", success: function(data){
               $("#content").html(data.modules);
           }});
-        });
+        }
 
-        $("#getForms").click(function(){
+        function getForms(){
           $.ajax({url: "{% url 'forms' %}", success: function(data){
               $("#content").html(data.forms);
           }});
-        });
+        }
 
-        $("#getForm").click(function(){
-          $.ajax({url: "{% url 'form' %}", data: {'id': 1}, success: function(data){
-              $("#content").html(data.form);
+        function getKnowledge(){
+          $.ajax({url: "{% url 'knowledge' %}", success: function(data){
+              $("#content").html(data.knowledge_list);
           }});
-        });
+        }
+
+        function runSearch(){
+          $.ajax({url: "{% url 'search' %}", success: function(data){
+              $("#content").html(data.result);
+          }});
+        }
+
     </script>
 
 </body>

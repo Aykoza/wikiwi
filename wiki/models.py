@@ -34,7 +34,7 @@ class View(models.Model):
         return self.name
 
 
-class Error(models.Model):
+class Knowledge(models.Model):
     title = models.CharField(verbose_name=u'Заголовок', max_length=100)
     view = models.ForeignKey(View, on_delete=models.CASCADE)
     description = models.TextField(verbose_name=u'Описание', max_length=2000, blank=True, null=True)

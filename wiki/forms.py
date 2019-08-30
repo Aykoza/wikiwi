@@ -1,5 +1,5 @@
 from django import forms
-from .models import Error, Module, View
+from .models import Knowledge, Module, View
 
 
 class ModuleForm(forms.ModelForm):
@@ -19,5 +19,5 @@ class ViewForm(forms.ModelForm):
 class ErrorForm(forms.ModelForm):
 
     class Meta:
-        model = Error
+        model = Knowledge
         fields = ['title', 'view', 'description', 'decision', 'attachment']
