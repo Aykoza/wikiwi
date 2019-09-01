@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="head">
-        <form action="/example/handler.php">
+        <form name="Search">
           <div>
             <input type="search" id="myRequest" name="q">
             <input type="button" onclick="runSearch()" id="goSearch" value="Поиск"/>
@@ -20,10 +20,15 @@
         <input type="button" onclick="getForms()" value="Формы"/>
         <input type="button" onclick="getKnowledge()" value="Знания"/>
     </div>
-    <hr>
-
 
     <div id="content">
+    </div>
+
+    <div id="content2">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores consequatur consequuntur corporis cum cupiditate distinctio eligendi et, facere illum laborum minus, obcaecati omnis pariatur rerum saepe similique sit soluta, sunt.
+    </div>
+
+    <div id="footer">
     </div>
 
     <script>
@@ -46,8 +51,15 @@
         }
 
         function runSearch(){
-          $.ajax({url: "{% url 'search' %}", success: function(data){
-              $("#content").html(data.result);
+          var requestText = $('#myRequest')[0].value;
+          var requestModel = $('#content').children().attr('class');
+          console.log(requestText);
+          console.log(requestModel);
+          $.ajax({
+              url: "{% url 'search' %}",
+              data:{'text': requestText, 'model': requestModel},
+              success: function(data){
+                  $("#content").html(data.result);
           }});
         }
 

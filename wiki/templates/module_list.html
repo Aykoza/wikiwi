@@ -1,3 +1,5 @@
-{% for modul in modules %}
-    {{ modul.name }} - {{ modul.config }}
-{% endfor %}
+<div class="moduleList">
+    {% for modul in modules %}
+        {{ modul.name }} - {{ modul.config }}
+    {% endfor %}
+</div>

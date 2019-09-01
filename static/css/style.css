@@ -1,3 +1,41 @@
-body {
-    /*background-color: rgba(109, 220, 189, 0.18);*/
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0px;
 }
+
+.head {
+    border-bottom: 1px solid black;
+    background: #307557;
+    height: 45px;
+    margin: auto;
+    padding: 15px;
+}
+
+#content {
+    position: relative;
+    bottom: 0px;
+    float: left;
+    width: 350px;
+    min-height: 100%;
+    border: 1px solid black;
+    /*background: #1BA56A;*/
+}
+
+#content2 {
+    border: 1px solid black;
+    min-height: 100%;
+}
+
+.formList div {
+    height: 35px;
+}
+
+.formList div:hover {
+    background: #1BA56A;
+}
+
+/*#footer {*/
+/*    position: absolute;*/
+/*    bottom: auto;*/
+/*}*/
