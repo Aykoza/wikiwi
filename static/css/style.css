@@ -5,7 +5,6 @@ html, body {
 }
 
 .head {
-    border-bottom: 1px solid black;
     background: #307557;
     height: 45px;
     margin: auto;
@@ -18,24 +17,20 @@ html, body {
     float: left;
     width: 350px;
     min-height: 100%;
-    border: 1px solid black;
-    /*background: #1BA56A;*/
+    border-right: 1px solid #dedede;
+    background: #34a51b0a;
 }
 
 #content2 {
-    border: 1px solid black;
     min-height: 100%;
 }
 
-.formList div {
+.List div {
     height: 35px;
 }
 
-.formList div:hover {
+.List div:hover {
     background: #1BA56A;
+    cursor: pointer;
 }
 
-/*#footer {*/
-/*    position: absolute;*/
-/*    bottom: auto;*/
-/*}*/

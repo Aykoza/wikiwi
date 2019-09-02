@@ -3,3 +3,19 @@
         {{ modul.name }} - {{ modul.config }}
     {% endfor %}
 </div>
+
+<div class="moduleList List">
+    {% for module in knowledge_list %}
+        <div onclick="getKnowledge({{ knowledge.id }})">{{ knowledge }}</div>
+    {% endfor %}
+</div>
+
+<script>
+
+    function getKnowledge(id){
+      $.ajax({url: "{% url 'knowledge' %}", data: {'id': id } , success: function(data){
+          $("#content2").html(data.knowledge);
+      }});
+    }
+
+</script>

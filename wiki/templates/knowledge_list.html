@@ -1,5 +1,15 @@
-<div class="knowledgeList">
+<div class="knowledgeList List">
     {% for knowledge in knowledge_list %}
-        {{ knowledge }}
+        <div onclick="getKnowledge({{ knowledge.id }})">{{ knowledge }}</div>
     {% endfor %}
 </div>
+
+<script>
+
+    function getKnowledge(id){
+      $.ajax({url: "{% url 'knowledge' %}", data: {'id': id } , success: function(data){
+          $("#content2").html(data.knowledge);
+      }});
+    }
+
+</script>

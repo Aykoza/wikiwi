@@ -23,3 +23,14 @@ class KnowledgeList(generic.ListView):
             return JsonResponse({'knowledge_list': knowledge_list})
         else:
             raise Http404('Post request ERROR!')
+
+    def get_knowledge(request):
+        # print(request.GET['id'])
+        if request.method == 'GET':
+            qs_form = Knowledge.objects.filter(id=request.GET['id'])
+            print(qs_form[0])
+            knowledge = render_to_string('knowledge.html', {'knowledge': Knowledge.objects.filter(id=request.GET['id'])[0]})
+            # modules = serialize('json', Module.objects.all())
+            return JsonResponse({'knowledge': knowledge})
+        else:
+            raise Http404('Post request ERROR!')

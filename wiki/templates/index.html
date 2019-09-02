@@ -18,7 +18,7 @@
         </form>
         <input type="button" onclick="getModules()" value="Модули" name="modules"/>
         <input type="button" onclick="getForms()" value="Формы"/>
-        <input type="button" onclick="getKnowledge()" value="Знания"/>
+        <input type="button" onclick="getKnowledgeList()" value="Знания"/>
     </div>
 
     <div id="content">
@@ -44,8 +44,8 @@
           }});
         }
 
-        function getKnowledge(){
-          $.ajax({url: "{% url 'knowledge' %}", success: function(data){
+        function getKnowledgeList(){
+          $.ajax({url: "{% url 'knowledge_list' %}", success: function(data){
               $("#content").html(data.knowledge_list);
           }});
         }

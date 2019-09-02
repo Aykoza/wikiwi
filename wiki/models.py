@@ -11,6 +11,7 @@ class Configuration(models.Model):
 class Module(models.Model):
     name = models.CharField(verbose_name=u'Название', max_length=100)
     config = models.ForeignKey(Configuration, on_delete=models.CASCADE)
+    description = models.TextField(verbose_name=u'Описание', max_length=2000, blank=True, null=True)
 
     def __str__(self):
         return self.name
