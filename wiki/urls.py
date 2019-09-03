@@ -16,3 +16,8 @@ urlpatterns = [
     path('search/', Main.search, name='search'),
     # path('errors/', KnowledgeList.as_view(), name='knowledge'),
 ]
+
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

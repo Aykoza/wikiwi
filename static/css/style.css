@@ -12,17 +12,20 @@ html, body {
 }
 
 #content {
-    position: relative;
-    bottom: 0px;
+    /*display: block;*/
+    /*position: relative;*/
+    /*bottom: 0px;*/
     float: left;
     width: 550px;
-    height: 80%;
+    height: 85%;
     border-right: 1px solid #dedede;
     background: #34a51b0a;
 }
 
 #content2 {
-    min-height: 80%;
+    min-height: 85%;
+    display: table;
+    padding: 30px;
 }
 
 .List {
@@ -32,7 +35,7 @@ html, body {
 
 .List div {
     height: 75px;
-    border: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
 }
 
 .List div:hover {
@@ -41,6 +44,13 @@ html, body {
 }
 
 #footer {
-    height: 50px;
+    height: 100%;
     background: #79aec8;
+    position: absolute;
+    width: 100%;
 }
+
+/*.content {*/
+/*    display: flex;*/
+/*    padding: 30px;*/
+/*}*/

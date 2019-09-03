@@ -53,7 +53,7 @@
 
         function runSearch(){
           var requestText = $('#myRequest')[0].value;
-          var requestModel = $('#content').children().attr('class');
+          var requestModel = $('#content').children().attr('class').split(' ')[0];
           console.log(requestText);
           console.log(requestModel);
           $.ajax({

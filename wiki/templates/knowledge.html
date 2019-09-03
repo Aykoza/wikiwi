@@ -1,7 +1,11 @@
-<div class="knowledge">
-    {{ knowledge }} <br>
-    {{ knowledge.view }} <br>
-    {{ knowledge.description }} <br>
+{% load static %}
+<div class="knowledge content">
+    <h3>{{ knowledge }}</h3> <br>
+    <b>Форма:</b> {{ knowledge.view }} <br><br>
+    <b>Проблема:</b><br>
+    {{ knowledge.description }} <br><br>
+    <b>Решение:</b><br>
     {{ knowledge.decision }} <br>
+    <img src="{{ knowledge.attachment.url }}" alt="">
     {{ knowledge.attachment }}
 </div>
