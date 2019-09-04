@@ -21,33 +21,37 @@
         <input type="button" onclick="getKnowledgeList()" value="Знания"/>
     </div>
 
+
     <div id="content">
+        <div id="contentList"></div>
+        <div id="contentListAdd">кнопка</div>
     </div>
+
+
 
     <div id="content2">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores consequatur consequuntur corporis cum cupiditate distinctio eligendi et, facere illum laborum minus, obcaecati omnis pariatur rerum saepe similique sit soluta, sunt.
     </div>
 
     <div id="footer">
-        footer
     </div>
 
     <script>
         function getModules(){
           $.ajax({url: "{% url 'modules' %}", success: function(data){
-              $("#content").html(data.modules);
+              $("#contentList").html(data.modules);
           }});
         }
 
         function getForms(){
           $.ajax({url: "{% url 'forms' %}", success: function(data){
-              $("#content").html(data.forms);
+              $("#contentList").html(data.forms);
           }});
         }
 
         function getKnowledgeList(){
           $.ajax({url: "{% url 'knowledge_list' %}", success: function(data){
-              $("#content").html(data.knowledge_list);
+              $("#contentList").html(data.knowledge_list);
           }});
         }
 
@@ -60,7 +64,7 @@
               url: "{% url 'search' %}",
               data:{'text': requestText, 'model': requestModel},
               success: function(data){
-                  $("#content").html(data.result);
+                  $("#contentList").html(data.result);
           }});
         }
 

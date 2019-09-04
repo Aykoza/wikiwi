@@ -6,9 +6,10 @@ html, body {
 
 .head {
     background: #307557;
-    height: 45px;
+    height: 75px;
     margin: auto;
-    padding: 15px;
+    padding-left: 25px;
+    padding-top: 30px;
 }
 
 #content {
@@ -28,14 +29,23 @@ html, body {
     padding: 30px;
 }
 
-.List {
-    height: 100%;
+#contentList {
+    height: 95%;
     overflow-y: scroll;
 }
 
+#contentListAdd {
+    height: 5%;
+    background: #5b80b2;
+}
+
 .List div {
-    height: 75px;
-    border-bottom: 1px solid #dedede;
+    height: 72px;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
 .List div:hover {
@@ -43,19 +53,15 @@ html, body {
     cursor: pointer;
 }
 
+.List b {
+    display: block;
+    margin-block-end: 5px;
+}
+
+
 #footer {
     height: 100%;
-    background: #79aec8;
+    background: #307457;
     position: absolute;
     width: 100%;
 }
-
-.knowledge img {
-    max-height: 200px;
-    max-width: 200px;
-    object-fit: cover;
-}
-/*.content {*/
-/*    display: flex;*/
-/*    padding: 30px;*/
-/*}*/
