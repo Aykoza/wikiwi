@@ -20,4 +20,4 @@ class ErrorForm(forms.ModelForm):
 
     class Meta:
         model = Knowledge
-        fields = ['title', 'view', 'description', 'decision', 'attachment']
+        fields = ['title', 'view', 'description', 'decision']

@@ -5,7 +5,9 @@
     <b>Проблема:</b><br>
     {{ knowledge.description }} <br><br>
     <b>Решение:</b><br>
-    {{ knowledge.decision }} <br>
-    <img src="{{ knowledge.attachment.url }}" alt="">
-    {{ knowledge.attachment }}
+    {{ knowledge.decision }} <br><br>
+    <b>Вложения:</b><br>
+    {% for attachment in attachments %}
+        <a href="/media/{{ attachment.path }}">{{ attachment.name }}</a><br>
+    {% endfor %}
 </div>

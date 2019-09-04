@@ -50,6 +50,11 @@ html, body {
     width: 100%;
 }
 
+.knowledge img {
+    max-height: 200px;
+    max-width: 200px;
+    object-fit: cover;
+}
 /*.content {*/
 /*    display: flex;*/
 /*    padding: 30px;*/
