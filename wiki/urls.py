@@ -14,6 +14,7 @@ urlpatterns = [
     path('knowledge/', KnowledgeList.get_knowledge, name='knowledge'),
     path('views/', ViewList.as_view(), name='views'),
     path('search/', Main.search, name='search'),
+    path('get_form/', Main.get_form, name='get_add_element_form')
     # path('errors/', KnowledgeList.as_view(), name='knowledge'),
 ]
 

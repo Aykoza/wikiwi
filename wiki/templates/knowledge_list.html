@@ -1,6 +1,6 @@
 <div class="knowledgeList List">
     {% for knowledge in knowledge_list %}
-        <div id="block_{{ knowledge.id }}" onclick="getKnowledge({{ knowledge.id }})">
+        <div class="elementList" id="block_{{ knowledge.id }}" onclick="getKnowledge({{ knowledge.id }}); changeStyle($(this))">
             <b>{{ knowledge }}</b>
             {{ knowledge.description }}
         </div>
@@ -9,20 +9,8 @@
 
 <script>
 
-//    var active_block = NaN;
-
     function getKnowledge(id){
-/*        var block='#block_' + id;
 
-        try {
-            active_block.css('background-color', '#34a51b0a');
-        } catch (e) {
-            console.log(e)
-        }
-
-        $(block).css('background', '#1ba56a26');
-        active_block = $(block);
-*/
       $.ajax({url: "{% url 'knowledge' %}", data: {'id': id } , success: function(data){
           $("#content2").html(data.knowledge);
       }});

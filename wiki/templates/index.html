@@ -24,7 +24,7 @@
 
     <div id="content">
         <div id="contentList"></div>
-        <div id="contentListAdd">кнопка</div>
+        <div id="contentListAdd" onclick="getAddElementForm()">Добавить</div>
     </div>
 
 
@@ -32,11 +32,24 @@
     <div id="content2">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores consequatur consequuntur corporis cum cupiditate distinctio eligendi et, facere illum laborum minus, obcaecati omnis pariatur rerum saepe similique sit soluta, sunt.
     </div>
-
-    <div id="footer">
-    </div>
+{##}
+{#    <div id="footer">#}
+{#    </div>#}
 
     <script>
+
+        var active_block = NaN;
+
+        function changeStyle(div) {
+
+            if (active_block) {
+                active_block[0].className = 'elementList';
+            }
+
+            active_block = div;
+            div[0].className = 'active elementList';
+        }
+
         function getModules(){
           $.ajax({url: "{% url 'modules' %}", success: function(data){
               $("#contentList").html(data.modules);
@@ -57,7 +70,7 @@
 
         function runSearch(){
           var requestText = $('#myRequest')[0].value;
-          var requestModel = $('#content').children().attr('class').split(' ')[0];
+          var requestModel = $('#contentList').children().attr('class').split(' ')[0];
           console.log(requestText);
           console.log(requestModel);
           $.ajax({
@@ -65,6 +78,13 @@
               data:{'text': requestText, 'model': requestModel},
               success: function(data){
                   $("#contentList").html(data.result);
+          }});
+        }
+
+        function getAddElementForm() {
+          var requestModel = $('#contentList').children().attr('class').split(' ')[0];
+          $.ajax({url: "{% url 'get_add_element_form' %}", data: {'model': requestModel } , success: function(data){
+              $("#content2").html(data.result);
           }});
         }
 

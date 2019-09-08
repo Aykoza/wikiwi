@@ -1,6 +1,6 @@
 <div class="formList List">
     {% for form in forms %}
-        <div onclick="getForm({{ form.id }})">{{ form }}</div>
+        <div class="elementList" onclick="getForm({{ form.id }}); changeStyle($(this))">{{ form }}</div>
 {#        <input  type="button" class="getForm" form_id = {{ form.id }} value="{{ form }}"/><br>#}
     {% endfor %}
 </div>

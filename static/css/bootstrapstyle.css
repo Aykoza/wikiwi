@@ -1,0 +1,13 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0px;
+}
+
+.head {
+    background: #307557;
+    height: 75px;
+    margin: auto;
+    padding-left: 25px;
+    padding-top: 30px;
+}

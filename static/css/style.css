@@ -12,6 +12,10 @@ html, body {
     padding-top: 30px;
 }
 
+.content {
+    height: 95%;
+}
+
 #content {
     /*display: block;*/
     /*position: relative;*/
@@ -27,6 +31,8 @@ html, body {
     min-height: 85%;
     display: table;
     padding: 30px;
+    position: relative;
+
 }
 
 #contentList {
@@ -34,12 +40,25 @@ html, body {
     overflow-y: scroll;
 }
 
+
 #contentListAdd {
-    height: 5%;
     background: #5b80b2;
+    height: 5%;
+    text-align: center;
+    cursor: pointer;
 }
 
-.List div {
+.editElement {
+    background: #f8b028;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    height: 5%;
+    width: 300px;
+}
+
+.elementList {
     height: 72px;
     overflow: hidden;
     padding-left: 10px;
@@ -48,14 +67,18 @@ html, body {
     padding-bottom: 10px;
 }
 
-.List div:hover {
+.elementList:hover {
     background: #1BA56A;
     cursor: pointer;
 }
 
-.List b {
+.elementList b {
     display: block;
     margin-block-end: 5px;
+}
+
+.active {
+    background: #34a51b36;
 }
 
 
