@@ -32,5 +32,5 @@ class Main(TemplateView):
 
         if model == 'knowledgeList':
             form = ErrorForm()
-        result = render_to_string('form_for_change.html', {'form': form})
+        result = render_to_string('form_for_change.html', {'form': form}, request=request)
         return JsonResponse({'result': result})
