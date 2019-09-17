@@ -16,13 +16,14 @@ class KnowledgeList(generic.ListView):
         context['form'] = self.form
         return context
 
-    def get_data(request):
-        if request.method == 'GET':
-            knowledge_list = render_to_string('knowledge_list.html', {'knowledge_list': Knowledge.objects.all()})
-            # modules = serialize('json', Module.objects.all())
-            return JsonResponse({'knowledge_list': knowledge_list})
-        else:
-            raise Http404('Post request ERROR!')
+    @staticmethod
+    def get_data(request=None):
+        # if request.method == 'GET':
+        knowledge_list = render_to_string('knowledge_list.html', {'knowledge_list': Knowledge.objects.all()})
+        # modules = serialize('json', Module.objects.all())
+        return JsonResponse({'knowledge_list': knowledge_list})
+        # else:
+        #     raise Http404('Post request ERROR!')
 
     def get_knowledge(request):
         if request.method == 'GET':
@@ -30,5 +31,15 @@ class KnowledgeList(generic.ListView):
             attachments = Attachment.objects.filter(knowledge=request.GET['id'])
             result = render_to_string('knowledge.html', {'knowledge': knowledge, 'attachments': attachments})
             return JsonResponse({'knowledge': result})
+        else:
+            raise Http404('Post request ERROR!')
+
+    def save_knowledge(request):
+        if request.method == 'POST':
+            form = ErrorForm(request.POST)
+            print(form)
+            if form.is_valid():
+                form.save()
+                # self.get_data()
         else:
             raise Http404('Post request ERROR!')
