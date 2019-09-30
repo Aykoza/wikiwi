@@ -8,7 +8,7 @@
 
     function getModule(id){
       $.ajax({url: "{% url 'module' %}", data: {'id': id } , success: function(data){
-          $("#content2").html(data.module);
+          $("#contentItem").html(data.module);
       }});
     }
 

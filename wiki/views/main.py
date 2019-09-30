@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 from wiki.models import Module, View, Knowledge
 from django.template.loader import render_to_string

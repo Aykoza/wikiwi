@@ -1,29 +1,30 @@
 from django.http import JsonResponse, Http404
 from django.template.loader import render_to_string
 from django.views import generic
+from django.views import View
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
+
 from wiki.forms import ErrorForm
 from wiki.models import Knowledge, Attachment
+from .main import Main
 
 
-class KnowledgeList(generic.ListView):
+class KnowledgeList(View):
     model = Knowledge
     template_name = 'knowledge_list.html'
-    form = ErrorForm
+    # form = ErrorForm
 
     def get_context_data(self, **kwargs):
-        context = super(Knowledge, self).get_context_data(**kwargs)
+        context = super(KnowledgeList, self).get_context_data(**kwargs)
         context['error_list'] = Knowledge.objects.all()
         context['form'] = self.form
         return context
 
-    @staticmethod
     def get_data(request=None):
-        # if request.method == 'GET':
         knowledge_list = render_to_string('knowledge_list.html', {'knowledge_list': Knowledge.objects.all()})
-        # modules = serialize('json', Module.objects.all())
         return JsonResponse({'knowledge_list': knowledge_list})
-        # else:
-        #     raise Http404('Post request ERROR!')
 
     def get_knowledge(request):
         if request.method == 'GET':
@@ -34,12 +35,17 @@ class KnowledgeList(generic.ListView):
         else:
             raise Http404('Post request ERROR!')
 
-    def save_knowledge(request):
+    def save_knowledge(self, request):
         if request.method == 'POST':
             form = ErrorForm(request.POST)
-            print(form)
             if form.is_valid():
                 form.save()
-                # self.get_data()
+                knowledge_list = self.get_data()
+                return knowledge_list
         else:
             raise Http404('Post request ERROR!')
+
+    def remove_knowledge(self, request):
+        knowledge = Knowledge.objects.filter(id=request.GET['id'])[0]
+        knowledge.delete()
+        return self.get_data()

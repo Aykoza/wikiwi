@@ -9,7 +9,18 @@
     {% for attachment in attachments %}
         <a href="/media/{{ attachment.path }}" target="_blank">{{ attachment.name }}</a><br>
     {% endfor %}
-
-    <div class="editElement">Редактировать</div>
-
+    <div class="changeElement">
+        <div id="editElement">Редактировать</div>
+        <div id="removeElement" onclick="removeKnowledge({{ knowledge.id }})">Удалить</div>
+    </div>
 </div>
+
+<script>
+
+    function removeKnowledge(id){
+      $.ajax({url: "{% url 'remove_knowledge' %}", data: {'id': id } , success: function(data){
+          $("#contentList").html(data.knowledge_list);
+      }});
+    }
+
+</script>

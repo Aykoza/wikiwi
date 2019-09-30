@@ -1,12 +1,16 @@
-<form onsubmit="saveKnowledge()" method="post">
+<form id="myForm" action="javascript:saveKnowledge()" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="сохранить">
 </form>
 <script>
-    function saveKnowledge(){
-      $.post({url: "{% url 'save_knowledge' %}", function(data){
-          $("#contentList").html(data.knowledge_list);
-      }});
+
+    function saveKnowledge() {
+        $.post( "{% url 'save_knowledge' %}", $('#myForm').serialize())
+            .done(function(data) {
+            $("#contentList").html(data.knowledge_list);
+          });
     }
+
+
 </script>

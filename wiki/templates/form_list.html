@@ -8,7 +8,7 @@
 
     function getForm(id){
       $.ajax({url: "{% url 'form' %}", data: {'id': id } , success: function(data){
-          $("#content2").html(data.form);
+          $("#contentItem").html(data.form);
       }});
     }
 

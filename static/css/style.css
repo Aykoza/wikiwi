@@ -27,7 +27,7 @@ html, body {
     background: #34a51b0a;
 }
 
-#content2 {
+#contentItem {
     min-height: 85%;
     display: table;
     padding: 30px;
@@ -48,14 +48,26 @@ html, body {
     cursor: pointer;
 }
 
-.editElement {
-    background: #f8b028;
+.changeElement {
     text-align: center;
     cursor: pointer;
     position: absolute;
     bottom: 0px;
     height: 5%;
-    width: 300px;
+    width: 400px;
+    display: flex;
+}
+
+#editElement {
+    background: #f8b028;
+    width: 200px;
+    margin-right: 5px;
+}
+
+#removeElement {
+    background: #e33636;
+    width: 200px;
+    margin-left: 5px;
 }
 
 .elementList {

@@ -12,7 +12,7 @@
     function getKnowledge(id){
 
       $.ajax({url: "{% url 'knowledge' %}", data: {'id': id } , success: function(data){
-          $("#content2").html(data.knowledge);
+          $("#contentItem").html(data.knowledge);
       }});
     }
 
