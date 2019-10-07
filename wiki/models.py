@@ -48,7 +48,7 @@ class Knowledge(models.Model):
 class Attachment(models.Model):
     name = models.CharField(verbose_name=u'Заголовок', max_length=100)
     path = models.ImageField(upload_to='knowledge/attachment', blank=True, verbose_name='вложение')
-    knowledge = models.ForeignKey(Knowledge, on_delete=models.CASCADE)
+    knowledge = models.ForeignKey(Knowledge, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name

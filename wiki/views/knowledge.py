@@ -2,11 +2,12 @@ from django.http import JsonResponse, Http404
 from django.template.loader import render_to_string
 from django.views import generic
 from django.views import View
+from django.views.generic import CreateView
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 
-from wiki.forms import ErrorForm
+from wiki.forms import ErrorForm, AttachmentForm
 from wiki.models import Knowledge, Attachment
 from .main import Main
 
@@ -49,3 +50,9 @@ class KnowledgeList(View):
         knowledge = Knowledge.objects.filter(id=request.GET['id'])[0]
         knowledge.delete()
         return self.get_data()
+
+
+class Attachment(CreateView):
+    model = Attachment
+    form = AttachmentForm
+    template_name = 'attachment.html'
